@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greenwood Public Library | Minimal Editorial</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f4f7f5',
+              100: '#e3ebe5',
+              200: '#c7d8cc',
+              600: '#2d5a3f',
+              800: '#1b3827',
+              900: '#0f2317',
+            },
+            cream: {
+              50: '#fcfbf7',
+              100: '#f7f4ed',
+              200: '#eee8d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .underline-animation::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: #0f2317;
+      transition: width 0.3s ease-in-out;
+    }
+    .underline-animation:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-[#FBF9F5] text-slate-800 font-sans antialiased selection:bg-brand-800 selection:text-white">
+
+  <!-- 1. Sticky Navigation Bar -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#FBF9F5]/85 border-b border-slate-200/60 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="#" class="font-serif text-2xl font-bold tracking-tight text-brand-900 flex items-center gap-2">
+          Greenwood
+        </a>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+          Open Sat
+        </span>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-700">
+        <a href="#sections" class="relative underline-animation py-1 transition-colors hover:text-brand-900">Sections</a>
+        <a href="#gallery" class="relative underline-animation py-1 transition-colors hover:text-brand-900">Gallery</a>
+        <a href="#values" class="relative underline-animation py-1 transition-colors hover:text-brand-900">About</a>
+        <a href="#membership" class="relative underline-animation py-1 transition-colors hover:text-brand-900">Membership</a>
+        <a href="#events" class="relative underline-animation py-1 transition-colors hover:text-brand-900">Events</a>
+      </nav>
+
+      <div class="hidden md:flex items-center space-x-4">
+        <button id="search-btn" class="p-2 text-slate-600 hover:text-brand-900 transition-colors" title="Search catalog">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </button>
+        <button onclick="openModal('join-modal')" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-medium text-brand-900 border border-brand-900 bg-transparent hover:bg-brand-900 hover:text-white transition-all duration-300">
+          Visit Us
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 hover:text-brand-900">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-[#FBF9F5] px-6 py-4 space-y-3 text-sm font-medium">
+      <a href="#sections" class="block py-1 text-slate-700">Sections</a>
+      <a href="#gallery" class="block py-1 text-slate-700">Gallery</a>
+      <a href="#values" class="block py-1 text-slate-700">About</a>
+      <a href="#membership" class="block py-1 text-slate-700">Membership</a>
+      <a href="#events" class="block py-1 text-slate-700">Events</a>
+      <button onclick="openModal('join-modal')" class="w-full mt-2 px-5 py-2.5 rounded-full text-sm font-medium text-white bg-brand-900 text-center">Visit Us</button>
+    </div>
+  </header>
+
+  <!-- 2. Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 pt-16 pb-20">
+    <div class="max-w-4xl">
+      <span class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-3 block">Est. 1984 • Public Resource Hub</span>
+      <h1 class="font-serif text-5xl md:text-7xl font-light text-slate-900 tracking-tight leading-[1.1] mb-8">
+        A sanctuary for curious minds, quiet study, and public discourse.
+      </h1>
+      <div class="flex flex-wrap items-center gap-4 mb-16">
+        <a href="#sections" class="px-7 py-3.5 rounded-full bg-brand-900 text-white text-sm font-medium hover:bg-brand-800 transition-colors shadow-sm">
+          Explore Collection
+        </a>
+        <button onclick="openModal('join-modal')" class="px-7 py-3.5 rounded-full border border-slate-300 text-slate-800 text-sm font-medium hover:border-brand-900 hover:text-brand-900 transition-colors">
+          Join Free Today
+        </button>
+      </div>
+    </div>
+
+    <div class="relative w-full h-[400px] md:h-[540px] rounded-2xl overflow-hidden shadow-lg group mb-16">
+      <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1600&q=80" alt="Greenwood Main Reading Hall" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+      <div class="absolute bottom-6 left-6 right-6 text-white flex justify-between items-end">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-emerald-300">The Grand Reading Room</p>
+          <p class="text-sm text-slate-200">Architectural heritage preserved with high-speed digital connectivity.</p>
+        </div>
+        <span class="text-xs text-slate-300 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">3rd Floor</span>
+      </div>
+    </div>
+
+    <!-- 4-Column Stats Row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-y border-slate-200/80">
+      <div>
+        <div class="font-serif text-3xl md:text-4xl text-brand-900 font-semibold mb-1">120,000+</div>
+        <div class="text-xs text-slate-500 uppercase tracking-wider font-medium">Cataloged Volumes</div>
+      </div>
+      <div>
+        <div class="font-serif text-3xl md:text-4xl text-brand-900 font-semibold mb-1">40+</div>
+        <div class="text-xs text-slate-500 uppercase tracking-wider font-medium">Years Serving Community</div>
+      </div>
+      <div>
+        <div class="font-serif text-3xl md:text-4xl text-brand-900 font-semibold mb-1">1 Gbps</div>
+        <div class="text-xs text-slate-500 uppercase tracking-wider font-medium">Free Fiber Wi-Fi</div>
+      </div>
+      <div>
+        <div class="font-serif text-3xl md:text-4xl text-brand-900 font-semibold mb-1">6 Dedicated</div>
+        <div class="text-xs text-slate-500 uppercase tracking-wider font-medium">Specialty Sections</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Sections Grid -->
+  <section id="sections" class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <h2 class="font-serif text-3xl md:text-4xl text-slate-900 font-normal mb-3">Library Sections</h2>
+        <p class="text-slate-600 text-sm max-w-md">Curated archives and quiet working spaces tailored for deep focus and discovery.</p>
+      </div>
+      
+      <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="section-filters">
+        <button data-filter="all" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-medium bg-brand-900 text-white transition-all">All</button>
+        <button data-filter="fiction" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-200/70 text-slate-700 hover:bg-slate-300 transition-all">Fiction & Literature</button>
+        <button data-filter="science" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-200/70 text-slate-700 hover:bg-slate-300 transition-all">Sciences & Tech</button>
+        <button data-filter="children" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-200/70 text-slate-700 hover:bg-slate-300 transition-all">Children & Youth</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="sections-grid">
+      <div data-category="fiction" class="section-card group p-8 rounded-2xl bg-white border border-slate-200/80 hover:bg-emerald-50/60 transition-all duration-300 cursor-pointer">
+        <div class="flex justify-between items-start mb-6">
+          <span class="text-xs font-mono text-slate-400 group-hover:text-emerald-700 transition-colors">SEC // 01</span>
+          <span class="p-2 rounded-full bg-slate-100 group-hover:bg-emerald-100 group-hover:text-emerald-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </span>
+        </div>
+        <h3 class="font-serif text-2xl text-slate-900 font-medium mb-3 group-hover:text-emerald-950 transition-colors">Fiction & Classic Literature</h3>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">Over 45,000 classic novels, contemporary fiction releases, rare manuscripts, and international translated prose.</p>
+        <span class="inline-flex items-center text-xs font-semibold text-slate-800 group-hover:text-emerald-800">Explore Fiction Wing &rarr;</span>
+      </div>
+
+      <div data-category="children" class="section-card group p-8 rounded-2xl bg-white border border-slate-200/80 hover:bg-amber-50/60 transition-all duration-300 cursor-pointer">
+        <div class="flex justify-between items-start mb-6">
+          <span class="text-xs font-mono text-slate-400 group-hover:text-amber-700 transition-colors">SEC // 02</span>
+          <span class="p-2 rounded-full bg-slate-100 group-hover:bg-amber-100 group-hover:text-amber-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </span>
+        </div>
+        <h3 class="font-serif text-2xl text-slate-900 font-medium mb-3 group-hover:text-amber-950 transition-colors">Children’s & Youth Library</h3>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">Interactive story corners, picture archives, early reader programs, and comfortable seating for young readers.</p>
+        <span class="inline-flex items-center text-xs font-semibold text-slate-800 group-hover:text-amber-800">Explore Youth Library &rarr;</span>
+      </div>
+
+      <div data-category="science" class="section-card group p-8 rounded-2xl bg-white border border-slate-200/80 hover:bg-sky-50/60 transition-all duration-300 cursor-pointer">
+        <div class="flex justify-between items-start mb-6">
+          <span class="text-xs font-mono text-slate-400 group-hover:text-sky-700 transition-colors">SEC // 03</span>
+          <span class="p-2 rounded-full bg-slate-100 group-hover:bg-sky-100 group-hover:text-sky-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </span>
+        </div>
+        <h3 class="font-serif text-2xl text-slate-900 font-medium mb-3 group-hover:text-sky-950 transition-colors">Sciences, Tech & Innovation</h3>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">Peer-reviewed journals, computer science literature, engineering reference guides, and quiet digital workstations.</p>
+        <span class="inline-flex items-center text-xs font-semibold text-slate-800 group-hover:text-sky-800">Explore Tech Section &rarr;</span>
+      </div>
+
+      <div data-category="fiction" class="section-card group p-8 rounded-2xl bg-white border border-slate-200/80 hover:bg-rose-50/60 transition-all duration-300 cursor-pointer">
+        <div class="flex justify-between items-start mb-6">
+          <span class="text-xs font-mono text-slate-400 group-hover:text-rose-700 transition-colors">SEC // 04</span>
+          <span class="p-2 rounded-full bg-slate-100 group-hover:bg-rose-100 group-hover:text-rose-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          </span>
+        </div>
+        <h3 class="font-serif text-2xl text-slate-900 font-medium mb-3 group-hover:text-rose-950 transition-colors">Local History & Microfilm Archives</h3>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">Historical periodicals, regional maps, town records dating back to 1890, and dedicated genealogical research tables.</p>
+        <span class="inline-flex items-center text-xs font-semibold text-slate-800 group-hover:text-rose-800">Explore History Archives &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Gallery Section -->
+  <section id="gallery" class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="mb-12">
+      <h2 class="font-serif text-3xl md:text-4xl text-slate-900 font-normal mb-3">Library Spaces</h2>
+      <p class="text-slate-600 text-sm max-w-md">Thoughtfully designed architectural spaces designed for private study and community collaboration.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="group overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/60 relative">
+        <div class="h-80 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=1000&q=80" alt="Silent Study Pods" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 absolute bottom-0 left-0 right-0 text-white flex justify-between items-center">
+          <div>
+            <h3 class="font-serif text-xl font-medium">Silent Study Carrels</h3>
+            <p class="text-xs text-slate-300">Acoustically damp Individual desks</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-md border border-white/30">2nd Floor</span>
+        </div>
+      </div>
+
+      <div class="group overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/60 relative">
+        <div class="h-80 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=80" alt="Periodical Lounge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 absolute bottom-0 left-0 right-0 text-white flex justify-between items-center">
+          <div>
+            <h3 class="font-serif text-xl font-medium">Periodicals & Coffee Lounge</h3>
+            <p class="text-xs text-slate-300">Daily global newspapers & fresh brews</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-md border border-white/30">Ground Level</span>
+        </div>
+      </div>
+
+      <div class="group overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/60 relative">
+        <div class="h-80 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1000&q=80" alt="Rare Books Vault" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 absolute bottom-0 left-0 right-0 text-white flex justify-between items-center">
+          <div>
+            <h3 class="font-serif text-xl font-medium">Rare Manuscripts Gallery</h3>
+            <p class="text-xs text-slate-300">Climate-controlled historical vault</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-md border border-white/30">Mezzanine</span>
+        </div>
+      </div>
+
+      <div class="group overflow-hidden rounded-2xl bg-slate-100 border border-slate-200/60 relative">
+        <div class="h-80 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80" alt="Innovation Lab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 absolute bottom-0 left-0 right-0 text-white flex justify-between items-center">
+          <div>
+            <h3 class="font-serif text-xl font-medium">Community Workshop Lab</h3>
+            <p class="text-xs text-slate-300">3D printing & media editing pods</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-md border border-white/30">1st Floor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Values Section (Bento Grid) -->
+  <section id="values" class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="mb-12">
+      <h2 class="font-serif text-3xl md:text-4xl text-slate-900 font-normal mb-3">Our Core Pillars</h2>
+      <p class="text-slate-600 text-sm max-w-md">How Greenwood remains a civic cornerstone for lifelong education and equitable access.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 p-8 md:p-10 rounded-2xl bg-slate-100 border border-slate-200/80 hover:bg-slate-200/70 transition-colors flex flex-col justify-between">
+        <div>
+          <span class="text-xs uppercase tracking-wider font-semibold text-brand-900 mb-4 block">Civic Charter</span>
+          <h3 class="font-serif text-3xl text-slate-900 font-normal mb-4">Open knowledge without barriers, paywalls, or commercial bias.</h3>
+          <p class="text-slate-600 text-sm leading-relaxed max-w-xl">
+            Founded on the principle that equal access to books, verified information, and serene working space is fundamental to a flourishing community.
+          </p>
+        </div>
+        <div class="mt-8 pt-6 border-t border-slate-300/60 flex items-center gap-6 text-xs text-slate-500">
+          <span>• Free Open Access</span>
+          <span>• Non-Profit Institution</span>
+          <span>• Public Funded</span>
+        </div>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-emerald-50/70 border border-emerald-100 hover:bg-emerald-100/80 transition-colors flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-emerald-200/60 text-emerald-900 flex items-center justify-center font-bold mb-6">01</div>
+          <h4 class="font-serif text-2xl text-emerald-950 font-medium mb-2">Community First</h4>
+          <p class="text-xs text-emerald-800/80 leading-relaxed">Hosting over 200 free public literary events, youth reading circles, and lectures every year.</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-900 mt-6 block">Learn About Programs &rarr;</span>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-amber-50/70 border border-amber-100 hover:bg-amber-100/80 transition-colors flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-amber-200/60 text-amber-900 flex items-center justify-center font-bold mb-6">02</div>
+          <h4 class="font-serif text-2xl text-amber-950 font-medium mb-2">Digital Archiving</h4>
+          <p class="text-xs text-amber-800/80 leading-relaxed">24/7 online borrowing access to 80,000+ e-books, audiobooks, and academic databases.</p>
+        </div>
+        <span class="text-xs font-semibold text-amber-900 mt-6 block">E-Library Portal &rarr;</span>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-rose-50/70 border border-rose-100 hover:bg-rose-100/80 transition-colors flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-rose-200/60 text-rose-900 flex items-center justify-center font-bold mb-6">03</div>
+          <h4 class="font-serif text-2xl text-rose-950 font-medium mb-2">Quiet Spaces</h4>
+          <p class="text-xs text-rose-800/80 leading-relaxed">A sanctuary designed for focused research, quiet study, and contemplation.</p>
+        </div>
+        <span class="text-xs font-semibold text-rose-900 mt-6 block">Reserve Desk &rarr;</span>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-sky-50/70 border border-sky-100 hover:bg-sky-100/80 transition-colors flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-sky-200/60 text-sky-900 flex items-center justify-center font-bold mb-6">04</div>
+          <h4 class="font-serif text-2xl text-sky-950 font-medium mb-2">Preservation</h4>
+          <p class="text-xs text-sky-800/80 leading-relaxed">Dedicated climate vaults preserving 19th-century regional cartography and prints.</p>
+        </div>
+        <span class="text-xs font-semibold text-sky-900 mt-6 block">View Collections &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. About Section -->
+  <section class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="max-w-3xl mb-12">
+      <span class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-2 block">Institutional Story</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-slate-900 font-light leading-tight">
+        Preserving four decades of literary heritage in the heart of Greenwood.
+      </h2>
+    </div>
+
+    <div class="columns-1 sm:columns-2 gap-12 text-slate-600 text-sm leading-relaxed">
+      <p class="mb-6">
+        <span class="float-left text-5xl font-serif text-brand-900 font-bold leading-none pr-3 pt-1">E</span>stablished in 1984, the Greenwood Public Library began as a modest neighborhood collection of three thousand donated hardcovers. Over forty years of civic dedication and patronage transformed it into a regional hub for scholarship, culture, and digital literacy.
+      </p>
+      <p class="mb-6">
+        Our modern editorial archive balances timeless physical print craftsmanship with modern digital infrastructure. We host quiet individual study carrels alongside high-speed fiber computing labs, ensuring every citizen has the tools necessary to learn, create, and research.
+      </p>
+      <p class="mb-6">
+        Designed with architectural warmth, native timber, and natural daylighting, Greenwood offers an inviting sanctuary from digital fatigue. Whether you are conducting genealogical research or reading literature, our staff is committed to your search.
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. Membership Section -->
+  <section id="membership" class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="mb-12 text-center max-w-2xl mx-auto">
+      <h2 class="font-serif text-3xl md:text-4xl text-slate-900 font-normal mb-3">Membership Tiers</h2>
+      <p class="text-slate-600 text-sm">Borrowing privileges and library access cards are available free to all local residents.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
+        <div class="h-44 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="Resident Pass" class="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase font-semibold text-slate-400">Standard Access</span>
+            <h3 class="font-serif text-2xl font-medium text-slate-900 mt-1 mb-2">Resident Pass</h3>
+            <div class="font-serif text-3xl font-bold text-brand-900 mb-6">Free <span class="text-xs font-sans text-slate-500 font-normal">/ for residents</span></div>
+            <ul class="space-y-3 text-xs text-slate-600 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Up to 10 physical books borrowed
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Standard Wi-Fi access
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                14-day borrowing cycles
+              </li>
+            </ul>
+          </div>
+          <button onclick="openModal('join-modal')" class="w-full py-3 rounded-xl border border-slate-300 text-slate-800 text-xs font-semibold hover:border-brand-900 hover:text-brand-900 transition-colors">Apply For Resident Card</button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border-2 border-brand-900 bg-white overflow-hidden shadow-lg relative flex flex-col">
+        <span class="absolute top-4 right-4 z-10 bg-brand-900 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full shadow-md">
+          Most Popular
+        </span>
+        <div class="h-44 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80" alt="Scholar Pass" class="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase font-semibold text-emerald-700">Extended Privilege</span>
+            <h3 class="font-serif text-2xl font-medium text-slate-900 mt-1 mb-2">Scholar Pass</h3>
+            <div class="font-serif text-3xl font-bold text-brand-900 mb-6">₹150 <span class="text-xs font-sans text-slate-500 font-normal">/ year</span></div>
+            <ul class="space-y-3 text-xs text-slate-600 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                25 physical books & e-readers
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Private Study Carrel booking
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Access to digital journals & archives
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                30-day borrowing cycles
+              </li>
+            </ul>
+          </div>
+          <button onclick="openModal('join-modal')" class="w-full py-3 rounded-xl bg-brand-900 text-white text-xs font-semibold hover:bg-brand-800 transition-colors">Join as Scholar</button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
+        <div class="h-44 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80" alt="Fellow Patron Pass" class="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase font-semibold text-slate-400">Patron Circle</span>
+            <h3 class="font-serif text-2xl font-medium text-slate-900 mt-1 mb-2">Fellow Patron</h3>
+            <div class="font-serif text-3xl font-bold text-brand-900 mb-6">₹500 <span class="text-xs font-sans text-slate-500 font-normal">/ year</span></div>
+            <ul class="space-y-3 text-xs text-slate-600 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Unlimited borrowing privileges
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                VIP invitations to author galas
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Reserved archival seating
+              </li>
+            </ul>
+          </div>
+          <button onclick="openModal('join-modal')" class="w-full py-3 rounded-xl border border-slate-300 text-slate-800 text-xs font-semibold hover:border-brand-900 hover:text-brand-900 transition-colors">Become a Fellow</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Testimonial Section -->
+  <section class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="mb-6 flex justify-center">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Patron Avatar" class="w-20 h-20 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ring-4 ring-slate-200">
+      </div>
+      <blockquote class="font-serif text-2xl md:text-3xl text-slate-900 font-light leading-relaxed mb-6">
+        “Greenwood Public Library remains my sanctuary in the city. The quiet carrels and curated history collections provided the exact space I needed to complete my manuscript.”
+      </blockquote>
+      <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">
+        Dr. Eleanor Vance — Author & Historical Researcher
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Contact CTA -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="p-10 md:p-16 rounded-3xl bg-brand-900 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div>
+        <span class="text-xs uppercase tracking-widest text-emerald-300 font-semibold mb-2 block">Visit Us Today</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-light mb-4">424 Library Way, Sector 4, Greenwood</h2>
+        <p class="text-sm text-slate-300 max-w-md">Open Monday – Saturday, 8:00 AM – 9:00 PM. Closed Sundays for archive maintenance.</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <button onclick="openModal('directions-modal')" class="px-6 py-3 rounded-full bg-white text-brand-900 text-xs font-semibold hover:bg-slate-100 transition-colors">
+          Get Directions
+        </button>
+        <a href="mailto:info@greenwoodlibrary.org" class="px-6 py-3 rounded-full border border-white/30 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
+          Contact Librarian
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Events Section -->
+  <section id="events" class="max-w-7xl mx-auto px-6 py-20 border-b border-slate-200/80">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <h2 class="font-serif text-3xl md:text-4xl text-slate-900 font-normal mb-3">Cultural Events & Lectures</h2>
+        <p class="text-slate-600 text-sm max-w-md">Free public gatherings, poetry readings, and guest author symposiums.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="group cursor-pointer" onclick="openEventModal('Modern Literary Realism', 'Nov 12, 2026', 'Main Auditorium')">
+        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100">
+          <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80" alt="Lecture event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <span class="text-xs font-medium text-emerald-700 uppercase tracking-wider block mb-1">Nov 12, 2026</span>
+        <h3 class="font-serif text-lg font-medium text-slate-900 group-hover:text-brand-900 transition-colors mb-2">Modern Literary Realism Symposium</h3>
+        <p class="text-xs text-slate-500 line-clamp-2">A keynote panel featuring local novelists and critics on contemporary prose.</p>
+      </div>
+
+      <div class="group cursor-pointer" onclick="openEventModal('Youth Science Night', 'Nov 18, 2026', 'Children Section')">
+        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="Youth event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <span class="text-xs font-medium text-amber-700 uppercase tracking-wider block mb-1">Nov 18, 2026</span>
+        <h3 class="font-serif text-lg font-medium text-slate-900 group-hover:text-brand-900 transition-colors mb-2">Youth Astronomy & Science Night</h3>
+        <p class="text-xs text-slate-500 line-clamp-2">Interactive stargazing and beginner physics workshops for youth aged 8-15.</p>
+      </div>
+
+      <div class="group cursor-pointer" onclick="openEventModal('Historical Map Preservation', 'Nov 25, 2026', 'Archive Vault')">
+        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Archive event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <span class="text-xs font-medium text-rose-700 uppercase tracking-wider block mb-1">Nov 25, 2026</span>
+        <h3 class="font-serif text-lg font-medium text-slate-900 group-hover:text-brand-900 transition-colors mb-2">Historical Cartography Showcase</h3>
+        <p class="text-xs text-slate-500 line-clamp-2">Inspect 19th-century regional maps with chief archival restorer Clara Hastings.</p>
+      </div>
+
+      <div class="group cursor-pointer" onclick="openEventModal('Poetry & Coffee Evening', 'Dec 02, 2026', 'Periodical Lounge')">
+        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100">
+          <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=600&q=80" alt="Poetry event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <span class="text-xs font-medium text-sky-700 uppercase tracking-wider block mb-1">Dec 02, 2026</span>
+        <h3 class="font-serif text-lg font-medium text-slate-900 group-hover:text-brand-900 transition-colors mb-2">Open Mic Poetry & Coffee Evening</h3>
+        <p class="text-xs text-slate-500 line-clamp-2">Share original verse or listen to community voices in our periodical lounge.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Footer Section -->
+  <footer class="bg-slate-900 text-slate-300 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
+        <div>
+          <span class="font-serif text-2xl font-bold text-white mb-4 block">Greenwood</span>
+          <p class="text-xs text-slate-400 leading-relaxed mb-6">A public institution dedicated to preserved knowledge, equitable access, and civic enrichment.</p>
+          <div class="flex items-center space-x-3">
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-600 hover:text-white transition-colors text-xs">X</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-600 hover:text-white transition-colors text-xs">IG</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-emerald-600 hover:text-white transition-colors text-xs">FB</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-white tracking-wider mb-4">Navigation</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="#sections" class="hover:text-white transition-colors">Catalog Sections</a></li>
+            <li><a href="#gallery" class="hover:text-white transition-colors">Library Spaces</a></li>
+            <li><a href="#values" class="hover:text-white transition-colors">Civic Pillars</a></li>
+            <li><a href="#membership" class="hover:text-white transition-colors">Patron Cards</a></li>
+            <li><a href="#events" class="hover:text-white transition-colors">Cultural Calendar</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-white tracking-wider mb-4">Hours</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li class="flex justify-between"><span>Mon – Fri:</span> <span class="text-slate-200">8:00 AM – 9:00 PM</span></li>
+            <li class="flex justify-between"><span>Saturday:</span> <span class="text-slate-200">9:00 AM – 6:00 PM</span></li>
+            <li class="flex justify-between"><span>Sunday:</span> <span class="text-emerald-400 font-medium">Closed</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-white tracking-wider mb-4">Patron Bulletin</h4>
+          <p class="text-xs text-slate-400 mb-4">Subscribe for monthly literary news & event announcements.</p>
+          <form id="bulletin-form" class="space-y-2">
+            <input type="email" required placeholder="Enter email address" class="w-full px-3 py-2 text-xs rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-emerald-500">
+            <button type="submit" class="w-full py-2 bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold rounded-lg transition-colors">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+        <p>&copy; 2026 Greenwood Public Library. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 sm:mt-0">
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Service</a>
+          <a href="#" class="hover:text-slate-400">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div id="search-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-2xl relative">
+      <div class="flex items-center border-b border-slate-200 pb-4">
+        <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="modal-search-input" placeholder="Search books, authors, rare manuscripts..." class="w-full text-sm focus:outline-none text-slate-800">
+        <button onclick="closeModal('search-modal')" class="text-slate-400 hover:text-slate-600 text-sm font-semibold">ESC</button>
+      </div>
+      <div id="search-results-list" class="mt-4 space-y-2 max-h-60 overflow-y-auto">
+        <p class="text-xs text-slate-400 italic py-4 text-center">Type to search Greenwood catalog...</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="join-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative">
+      <button onclick="closeModal('join-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">&times;</button>
+      <h3 class="font-serif text-2xl font-medium text-slate-900 mb-2">Register For Greenwood Card</h3>
+      <p class="text-xs text-slate-500 mb-6">Complete registration for borrowing privileges and digital access.</p>
+      <form id="join-form" class="space-y-4">
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Full Legal Name</label>
+          <input type="text" required class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Email Address</label>
+          <input type="email" required class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Preferred Membership Tier</label>
+          <select class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+            <option>Resident Pass (Free)</option>
+            <option>Scholar Pass (₹150/yr)</option>
+            <option>Fellow Patron (₹500/yr)</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3 bg-brand-900 text-white text-xs font-semibold rounded-xl hover:bg-brand-800 transition-colors">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="event-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative">
+      <button onclick="closeModal('event-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">&times;</button>
+      <span class="text-xs font-semibold uppercase text-emerald-700 tracking-wider block mb-1">Seat Reservation</span>
+      <h3 id="event-modal-title" class="font-serif text-2xl font-medium text-slate-900 mb-1">Event Title</h3>
+      <p id="event-modal-meta" class="text-xs text-slate-500 mb-6">Date • Location</p>
+      
+      <form id="event-form" class="space-y-4">
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Your Name</label>
+          <input type="text" required class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Email for Confirmation</label>
+          <input type="email" required class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-slate-700 block mb-1">Number of Seats</label>
+          <select class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-900 focus:outline-none">
+            <option>1 Seat</option>
+            <option>2 Seats</option>
+            <option>3 Seats</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3 bg-brand-900 text-white text-xs font-semibold rounded-xl hover:bg-brand-800 transition-colors">Confirm Free Seat</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="directions-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl relative text-center">
+      <button onclick="closeModal('directions-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">&times;</button>
+      <div class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl font-medium text-slate-900 mb-2">Greenwood Location</h3>
+      <p class="text-xs text-slate-600 mb-6">424 Library Way, Sector 4, Greenwood.<br>Accessible via City Bus Line 14 or Metro Central Station (Exit B).</p>
+      <button onclick="closeModal('directions-modal')" class="w-full py-3 bg-brand-900 text-white text-xs font-semibold rounded-xl">Close Map Info</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl text-xs font-medium translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+    Notification message
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
